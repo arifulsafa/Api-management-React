@@ -11,9 +11,10 @@ import { Tag } from 'lucide-react'
 
 interface ProductCardProps {
   product: Product
+  onClick?: () => void
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onClick }: ProductCardProps) {
   const mainImage = product.images[0] || 'https://placehold.co/400x300'
   const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -21,7 +22,10 @@ export function ProductCard({ product }: ProductCardProps) {
   }).format(product.price)
 
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg">
+    <Card
+      className="group overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer animate-fade-in"
+      onClick={onClick}
+    >
       <CardImage src={mainImage} alt={product.title} />
       <CardHeader>
         <div className="flex items-start justify-between gap-2">
